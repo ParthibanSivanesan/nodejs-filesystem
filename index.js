@@ -13,14 +13,14 @@ const app = express();
 
 
 let date = new Date();
-  let currentDate = date.toDateString().slice(4).replaceAll(/ /g,'');
-  let currentTime = date.toTimeString().slice(0,8).replaceAll(/:/g,'.');
+  let currentDate = date.toDateString().slice(4);
+  let currentTime = date.toTimeString().slice(0,8);
 
                   // console.log("CD", currentDate);
                   // console.log("CT", currentTime);
 
-  let day = date. toDateString().slice(0,3)
-  let CD = date.toDateString().slice(4).replaceAll(/ /g,'-');
+  let day = date. toDateString().slice(0,3);
+  let CD = date.toDateString().slice(4);
   let CT = date.toTimeString().slice(0,8);
                   // console.log("Cd", CD);
                   // console.log("Ct", CT);
@@ -31,8 +31,8 @@ let date = new Date();
 
 app.get("/timestamp", (req,res) => {
   
-  let fileName = currentDate + '-' + currentTime;
-  let fileContent = day + ',' + CD + ' ' + CT;
+  let fileName = currentDate.replaceAll(/ /g,'') + '-' + currentTime.replaceAll(/:/g,'.');
+  let fileContent = day + ',' + CD.replaceAll(/ /g,'-') + ' ' + CT;
   const timeStamp = ` Current Updated Time : ${fileContent}`;
   fs.writeFileSync(`${dirPath}/${fileName}.txt`,
     timeStamp,
