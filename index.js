@@ -13,14 +13,14 @@ const app = express();
 
 
 let date = new Date();
-  let currentDate = date.toDateString().slice(4).replaceAll(" ","");
-  let currentTime = date.toTimeString().slice(0,8).replaceAll(":",".");
+  let currentDate = date.toDateString().slice(4).replaceAll(/ /g,'');
+  let currentTime = date.toTimeString().slice(0,8).replaceAll(/:/g,'.');
 
                   // console.log("CD", currentDate);
                   // console.log("CT", currentTime);
 
   let day = date. toDateString().slice(0,3)
-  let CD = date.toDateString().slice(4).replaceAll(" ","-");
+  let CD = date.toDateString().slice(4).replaceAll(/ /g,'-');
   let CT = date.toTimeString().slice(0,8);
                   // console.log("Cd", CD);
                   // console.log("Ct", CT);
