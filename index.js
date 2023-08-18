@@ -1,7 +1,7 @@
 //API: //http://localhost:9003/ 
 //     //http://localhost:9003/timestamp
 
-const PORT = 9003;
+//const PORT = 9003;
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
@@ -61,4 +61,4 @@ app.get('/timestamp/:filename', function (req, res) {
 })
 
 
-app.listen(PORT, () => console.log(`Server started in Localhost Port:9003`));
+app.listen(9003, () => console.log(`Server started in Localhost Port:9003`));
