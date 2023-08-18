@@ -2,8 +2,8 @@
 //     //http://localhost:9003/timestamp
 
 const PORT = 9003;
-const express = require("express");
 const fs = require("fs");
+const express = require("express");
 const path = require("path");
 const dirPath = path.join(__dirname, "timestamps");
 const app = express();
@@ -12,7 +12,11 @@ const app = express();
 
 
 
-let date = new Date();
+//A) API endpoint to create a textfile in perticular folder
+
+app.get("/timestamp", function (req,res){
+
+  let date = new Date();
   let currentDate = date.toDateString().slice(4);
   let currentTime = date.toTimeString().slice(0,8);
 
@@ -26,19 +30,13 @@ let date = new Date();
                   // console.log("Ct", CT);
                   // console.log("day", day)
 
-
-//A) API endpoint to create a textfile in perticular folder
-
-app.get("/timestamp", (req,res) => {
   
   let fileName = currentDate.replaceAll(/ /g,'') + '-' + currentTime.replaceAll(/:/g,'.');
   let fileContent = day + ',' + CD.replaceAll(/ /g,'-') + ' ' + CT;
   const timeStamp = ` Current Updated Time : ${fileContent}`;
-  fs.writeFileSync(`${dirPath}/${fileName}.txt`,
-    timeStamp,
-    (err) => {
+  fs.writeFileSync(`${dirPath}/${fileName}.txt`, timeStamp, (err) => {
       if (err) {
-        console.log("err", err);
+        return res.send({message: err});
       }
     });
     res.sendFile(path.join(dirPath, `${fileName}.txt`));
