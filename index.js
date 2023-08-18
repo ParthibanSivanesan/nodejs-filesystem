@@ -34,12 +34,14 @@ app.get("/timestamp", function (req,res){
   let fileName = currentDate.replaceAll(/ /g,'') + '-' + currentTime.replaceAll(/:/g,'.');
   let fileContent = day + ',' + CD.replaceAll(/ /g,'-') + ' ' + CT;
   const timeStamp = ` Current Updated Time : ${fileContent}`;
+
   fs.writeFileSync(`${dirPath}/${fileName}.txt`, timeStamp, (err) => {
       if (err) {
         return res.send({message: err});
       }
     });
-    res.sendFile(path.join(dirPath, `${fileName}.txt`));
+    //res.sendFile(path.join(dirPath, `${fileName}.txt`));
+    res.send({message: 'Current timestamp', timestamp: timeStamp});
     
 });
 
